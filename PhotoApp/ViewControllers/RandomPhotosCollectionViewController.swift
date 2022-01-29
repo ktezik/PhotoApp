@@ -9,6 +9,10 @@ import UIKit
 
 class RandomPhotosCollectionViewController: UICollectionViewController {
 
+    var networkService = NetworkServices()
+    var networkFetcher = NetworkFetcher()
+    private var timer: Timer?
+    
     private lazy var addBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBarButton))
     }()
@@ -65,6 +69,13 @@ extension RandomPhotosCollectionViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
+            self.networkFetcher.fetchImages(searchText: searchText) { searchResults in
+                searchResults?.results.map({ (photo) in
+                    print(photo.urls?["small"])
+                })
+            }
+        })
     }
-    
 }

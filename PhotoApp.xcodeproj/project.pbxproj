@@ -14,6 +14,8 @@
 		F4D911F927A549C000AD18F8 /* RandomPhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D911F827A549C000AD18F8 /* RandomPhotosCollectionViewController.swift */; };
 		F4D911FF27A54C7300AD18F8 /* FavoritePhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D911FE27A54C7300AD18F8 /* FavoritePhotosCollectionViewController.swift */; };
 		F4D9120127A570E000AD18F8 /* UnsplashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9120027A570E000AD18F8 /* UnsplashModel.swift */; };
+		F4D9120427A5996800AD18F8 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9120327A5996800AD18F8 /* NetworkService.swift */; };
+		F4D9120727A5A3DA00AD18F8 /* NetworkFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9120627A5A3DA00AD18F8 /* NetworkFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		F4D911F827A549C000AD18F8 /* RandomPhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPhotosCollectionViewController.swift; sourceTree = "<group>"; };
 		F4D911FE27A54C7300AD18F8 /* FavoritePhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePhotosCollectionViewController.swift; sourceTree = "<group>"; };
 		F4D9120027A570E000AD18F8 /* UnsplashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashModel.swift; sourceTree = "<group>"; };
+		F4D9120327A5996800AD18F8 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		F4D9120627A5A3DA00AD18F8 /* NetworkFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				F4D911FB27A54B4C00AD18F8 /* ViewControllers */,
+				F4D9120527A59E3700AD18F8 /* Services */,
 				F4D9120227A570EE00AD18F8 /* Model */,
 				F4D911FC27A54B7000AD18F8 /* Resources */,
 				F4D911FA27A54B4000AD18F8 /* App */,
@@ -100,6 +105,15 @@
 				F4D9120027A570E000AD18F8 /* UnsplashModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F4D9120527A59E3700AD18F8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F4D9120327A5996800AD18F8 /* NetworkService.swift */,
+				F4D9120627A5A3DA00AD18F8 /* NetworkFetcher.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,8 +188,10 @@
 			files = (
 				F4D911F927A549C000AD18F8 /* RandomPhotosCollectionViewController.swift in Sources */,
 				F4D911E727A5409700AD18F8 /* TabBarViewController.swift in Sources */,
+				F4D9120727A5A3DA00AD18F8 /* NetworkFetcher.swift in Sources */,
 				F4D911E327A5409700AD18F8 /* AppDelegate.swift in Sources */,
 				F4D911FF27A54C7300AD18F8 /* FavoritePhotosCollectionViewController.swift in Sources */,
+				F4D9120427A5996800AD18F8 /* NetworkService.swift in Sources */,
 				F4D9120127A570E000AD18F8 /* UnsplashModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
