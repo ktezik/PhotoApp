@@ -8,27 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		F4D911E327A5409700AD18F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D911E227A5409700AD18F8 /* AppDelegate.swift */; };
-		F4D911E527A5409700AD18F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D911E427A5409700AD18F8 /* SceneDelegate.swift */; };
 		F4D911E727A5409700AD18F8 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D911E627A5409700AD18F8 /* TabBarViewController.swift */; };
-		F4D911EA27A5409700AD18F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4D911E827A5409700AD18F8 /* Main.storyboard */; };
 		F4D911EC27A5409700AD18F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4D911EB27A5409700AD18F8 /* Assets.xcassets */; };
 		F4D911EF27A5409700AD18F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4D911ED27A5409700AD18F8 /* LaunchScreen.storyboard */; };
-		F4D911F927A549C000AD18F8 /* RandomPhotosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D911F827A549C000AD18F8 /* RandomPhotosTableViewController.swift */; };
-		F4D911FF27A54C7300AD18F8 /* FavoritePhotosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D911FE27A54C7300AD18F8 /* FavoritePhotosTableViewController.swift */; };
+		F4D911F927A549C000AD18F8 /* RandomPhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D911F827A549C000AD18F8 /* RandomPhotosCollectionViewController.swift */; };
+		F4D911FF27A54C7300AD18F8 /* FavoritePhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D911FE27A54C7300AD18F8 /* FavoritePhotosCollectionViewController.swift */; };
 		F4D9120127A570E000AD18F8 /* UnsplashModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9120027A570E000AD18F8 /* UnsplashModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F4D911DF27A5409700AD18F8 /* PhotoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4D911E227A5409700AD18F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F4D911E427A5409700AD18F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F4D911E627A5409700AD18F8 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		F4D911E927A5409700AD18F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F4D911EB27A5409700AD18F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4D911EE27A5409700AD18F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4D911F027A5409700AD18F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F4D911F827A549C000AD18F8 /* RandomPhotosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPhotosTableViewController.swift; sourceTree = "<group>"; };
-		F4D911FE27A54C7300AD18F8 /* FavoritePhotosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePhotosTableViewController.swift; sourceTree = "<group>"; };
+		F4D911F827A549C000AD18F8 /* RandomPhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPhotosCollectionViewController.swift; sourceTree = "<group>"; };
+		F4D911FE27A54C7300AD18F8 /* FavoritePhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePhotosCollectionViewController.swift; sourceTree = "<group>"; };
 		F4D9120027A570E000AD18F8 /* UnsplashModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,9 +60,9 @@
 			children = (
 				F4D911FB27A54B4C00AD18F8 /* ViewControllers */,
 				F4D9120227A570EE00AD18F8 /* Model */,
-				F4D911FD27A54B8300AD18F8 /* Storyboards */,
 				F4D911FC27A54B7000AD18F8 /* Resources */,
 				F4D911FA27A54B4000AD18F8 /* App */,
+				F4D911ED27A5409700AD18F8 /* LaunchScreen.storyboard */,
 			);
 			path = PhotoApp;
 			sourceTree = "<group>";
@@ -75,7 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				F4D911E227A5409700AD18F8 /* AppDelegate.swift */,
-				F4D911E427A5409700AD18F8 /* SceneDelegate.swift */,
 				F4D911F027A5409700AD18F8 /* Info.plist */,
 			);
 			path = App;
@@ -85,8 +80,8 @@
 			isa = PBXGroup;
 			children = (
 				F4D911E627A5409700AD18F8 /* TabBarViewController.swift */,
-				F4D911F827A549C000AD18F8 /* RandomPhotosTableViewController.swift */,
-				F4D911FE27A54C7300AD18F8 /* FavoritePhotosTableViewController.swift */,
+				F4D911F827A549C000AD18F8 /* RandomPhotosCollectionViewController.swift */,
+				F4D911FE27A54C7300AD18F8 /* FavoritePhotosCollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -97,15 +92,6 @@
 				F4D911EB27A5409700AD18F8 /* Assets.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		F4D911FD27A54B8300AD18F8 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				F4D911E827A5409700AD18F8 /* Main.storyboard */,
-				F4D911ED27A5409700AD18F8 /* LaunchScreen.storyboard */,
-			);
-			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		F4D9120227A570EE00AD18F8 /* Model */ = {
@@ -176,7 +162,6 @@
 			files = (
 				F4D911EF27A5409700AD18F8 /* LaunchScreen.storyboard in Resources */,
 				F4D911EC27A5409700AD18F8 /* Assets.xcassets in Resources */,
-				F4D911EA27A5409700AD18F8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,11 +172,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4D911F927A549C000AD18F8 /* RandomPhotosTableViewController.swift in Sources */,
+				F4D911F927A549C000AD18F8 /* RandomPhotosCollectionViewController.swift in Sources */,
 				F4D911E727A5409700AD18F8 /* TabBarViewController.swift in Sources */,
 				F4D911E327A5409700AD18F8 /* AppDelegate.swift in Sources */,
-				F4D911E527A5409700AD18F8 /* SceneDelegate.swift in Sources */,
-				F4D911FF27A54C7300AD18F8 /* FavoritePhotosTableViewController.swift in Sources */,
+				F4D911FF27A54C7300AD18F8 /* FavoritePhotosCollectionViewController.swift in Sources */,
 				F4D9120127A570E000AD18F8 /* UnsplashModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,14 +183,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		F4D911E827A5409700AD18F8 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F4D911E927A5409700AD18F8 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F4D911ED27A5409700AD18F8 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -346,7 +322,6 @@
 				INFOPLIST_FILE = PhotoApp/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -375,7 +350,6 @@
 				INFOPLIST_FILE = PhotoApp/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

@@ -11,27 +11,19 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setTabBarController()
-    }
-    
-    func setTabBarController() {
-        let homeVC = UINavigationController(rootViewController: RandomPhotosTableViewController())
-        homeVC.title = "Photo"
-        let secondVC = UINavigationController(rootViewController: FavoritePhotosTableViewController())
-        secondVC.title = "Favorite"
+        let photoVC = RandomPhotosCollectionViewController(collectionViewLayout: UICollectionViewLayout())
+        let favoriteVC = FavoritePhotosCollectionViewController(collectionViewLayout: UICollectionViewLayout())
         
-        self.setViewControllers([homeVC, secondVC], animated: false)
-        
-        guard let items = self.tabBar.items else { return }
-        
-        let image = ["photo", "heart.rectangle"]
-        
-        for index in 0...(items.count - 1) {
-            items[index].image = UIImage(systemName: image[index])
-        }
+        self.setViewControllers([generateNavigationVC(viewController: photoVC, title: "Photo", systemImageName: "photo"), generateNavigationVC(viewController: favoriteVC, title: "Favorite", systemImageName: "heart.rectangle")], animated: false)
         
         self.tabBar.tintColor = .black
-//        self.tabBar.ima
+    }
+    
+    private func generateNavigationVC(viewController: UIViewController, title: String, systemImageName: String) -> UIViewController {
+        let navigationVC = UINavigationController(rootViewController: viewController)
+        navigationVC.tabBarItem.title = title
+        navigationVC.tabBarItem.image = UIImage(systemName: systemImageName)
+        return navigationVC
     }
     
 }
