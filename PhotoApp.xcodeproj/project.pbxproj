@@ -95,7 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				F4D911FB27A54B4C00AD18F8 /* ViewControllers */,
-				F41C091A27A6CEA600E62898 /* Base.swift */,
 				F4D9120527A59E3700AD18F8 /* Services */,
 				F4D9120227A570EE00AD18F8 /* Model */,
 				F4D911FC27A54B7000AD18F8 /* Resources */,
@@ -130,6 +129,7 @@
 		F4D911FC27A54B7000AD18F8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F41C091A27A6CEA600E62898 /* Base.swift */,
 				F4D911EB27A5409700AD18F8 /* Assets.xcassets */,
 			);
 			path = Resources;

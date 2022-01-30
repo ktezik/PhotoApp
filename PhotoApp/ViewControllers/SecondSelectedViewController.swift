@@ -47,11 +47,16 @@ class SecondSelectedViewController: UIViewController {
         setupVC()
     }
     
-    //MARK: - Button
+    //MARK: - Button and Alert
     
     @objc private func deleteBarButtonTapped() {
-        Base.shared.infos.remove(at: indexPath)
-        self.navigationController?.popViewController(animated: true)
+        
+        let alertView = UIAlertController(title: "Удалить фото", message: "Вы уверены?", preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "Удалить", style: .destructive, handler: { _ in
+            Base.shared.infos.remove(at: self.indexPath)
+            self.navigationController?.popViewController(animated: true)
+        }))
+        self.present(alertView, animated: true, completion: nil)
     }
     
     //MARK: - SetupVC
@@ -99,4 +104,6 @@ class SecondSelectedViewController: UIViewController {
         labelView.isScrollEnabled = false
         return labelView
     }
+    
+    
 }
