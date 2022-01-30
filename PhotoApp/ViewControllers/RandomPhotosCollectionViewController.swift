@@ -14,36 +14,35 @@ class RandomPhotosCollectionViewController: UICollectionViewController {
     
     private var photos: [Photo] = []
     
-    private lazy var addBarButtonItem: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBarButton))
-    }()
+    private let itemsPerRow: CGFloat = 2
+    private let sectionInserts = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupNavigationBar()
+        setupNavigationBar()
         setupCollectionView()
         setupSearchBar()
-    }
-    
-    @objc private func addBarButton() {
-        
+        setupFirsLoad()
     }
     
     //MARK: - SetupMethods
+    private func setupFirsLoad() {
+        networkFetcher.fetchImages(searchText: "random") { [weak self] searchResults in
+            guard let fetchesPhotos = searchResults else { return }
+            self?.photos = fetchesPhotos.results
+            self?.collectionView.reloadData()
+        }
+    }
     
     private func setupNavigationBar() {
         title = "Photos"
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.rightBarButtonItem = addBarButtonItem
     }
     
     private func setupCollectionView() {
-        
-//        let layout = UICollectionViewFlowLayout()
-//        layout.scrollDirection = .vertical
-//        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.frame = view.bounds
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.reuseID)
+        collectionView.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        collectionView.contentInsetAdjustmentBehavior = .automatic
     }
     
     private func setupSearchBar() {
@@ -67,6 +66,18 @@ class RandomPhotosCollectionViewController: UICollectionViewController {
         cell.photo = photo
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! PhotoCell
+        guard let image = cell.photoImageView.image else { return }
+        
+        let detailVC = SelectedItemViewController()
+        
+        detailVC.image = image
+        detailVC.info = photos[indexPath.item]
+        navigationController?.pushViewController(detailVC, animated: true)
+        
+    }
 }
 
     //MARK: - UISearchBarDelegate
@@ -77,15 +88,36 @@ extension RandomPhotosCollectionViewController: UISearchBarDelegate {
         print(searchText)
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
-            self.networkFetcher.fetchImages(searchText: searchText) { [weak self] searchResults in
+            
+            self.networkFetcher.fetchImages(searchText: searchText == "" ? "random" : searchText ) { [weak self] searchResults in
                 guard let fetchesPhotos = searchResults else { return }
                 self?.photos = fetchesPhotos.results
-                print(fetchesPhotos.results.count)
-//                searchResults?.results.map({ (photo) in
-//                    print(photo.urls["regular"], photo.urls)
-//                })
                 self?.collectionView.reloadData()
             }
         })
     }
+}
+
+    //MARK: - UISearchBarDelegate
+
+extension RandomPhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let photo = photos[indexPath.item]
+        let paddingSpace = sectionInserts.left * (itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+        let hight = CGFloat(photo.height) * widthPerItem / CGFloat(photo.width)
+        return CGSize(width: widthPerItem, height: hight)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInserts
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInserts.left
+    }
+    
 }
