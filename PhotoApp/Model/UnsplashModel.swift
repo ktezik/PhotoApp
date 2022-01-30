@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct UnsplashModel: Decodable {
+struct SearchResults: Decodable {
     let results: [Photo]
 }
 
 struct Photo: Decodable {
-    let width: Int?
-    let height: Int?
-    let created_at: String?
-    let likes: Int?
-    let description: String?
-    let user: [User]?
-    let urls: [URLs.RawValue:String]
+    let width: Int
+    let height: Int
+//    let created_at: String?
+//    let likes: Int?
+//    let description: String?
+//    let user: [User]?
+    let urls: [URLKing.RawValue:String]
     
-    enum URLs: String {
+    enum URLKing: String {
         case raw
         case full
         case regular
@@ -29,8 +29,8 @@ struct Photo: Decodable {
     }
 }
 
-struct User: Codable {
-    let name: String
-}
+//struct User: Decodable {
+//    let name: String?
+//}
 
 

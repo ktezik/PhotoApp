@@ -9,6 +9,7 @@ import Foundation
 
 class NetworkServices {
     func request(searchText: String, completion: @escaping (Data?, Error?) -> Void) {
+        
         let parameters = self.prepareParameters(searchText: searchText)
         let url = self.url(parameters: parameters)
         var request = URLRequest(url: url)
@@ -20,7 +21,7 @@ class NetworkServices {
     }
     
     private func prepareHeaders() -> [String: String]? {
-        var headers = [String:String]()
+        var headers = [String: String]()
         headers["Authorization"] = "Client-ID hNxJZczsBzc3PIw__6xIFLbhh6SVj8CnCVPPPDi5hsU"
         return headers
     }

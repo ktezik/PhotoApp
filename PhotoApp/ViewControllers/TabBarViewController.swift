@@ -11,10 +11,10 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let photoVC = RandomPhotosCollectionViewController(collectionViewLayout: UICollectionViewLayout())
+        let photoVC = RandomPhotosCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
         let favoriteVC = FavoritePhotosCollectionViewController(collectionViewLayout: UICollectionViewLayout())
         
-        self.setViewControllers([generateNavigationVC(viewController: photoVC, title: "Photo", systemImageName: "photo"), generateNavigationVC(viewController: favoriteVC, title: "Favorite", systemImageName: "heart.rectangle")], animated: false)
+        viewControllers = [generateNavigationVC(viewController: photoVC, title: "Photo", systemImageName: "photo"), generateNavigationVC(viewController: favoriteVC, title: "Favorite", systemImageName: "heart.rectangle")]
         
         self.tabBar.tintColor = .black
     }

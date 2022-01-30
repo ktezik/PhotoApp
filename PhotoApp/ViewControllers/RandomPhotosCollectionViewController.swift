@@ -20,7 +20,7 @@ class RandomPhotosCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
+//        setupNavigationBar()
         setupCollectionView()
         setupSearchBar()
     }
@@ -38,7 +38,10 @@ class RandomPhotosCollectionViewController: UICollectionViewController {
     }
     
     private func setupCollectionView() {
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        
+//        let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .vertical
+//        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.frame = view.bounds
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.reuseID)
     }
@@ -77,6 +80,11 @@ extension RandomPhotosCollectionViewController: UISearchBarDelegate {
             self.networkFetcher.fetchImages(searchText: searchText) { [weak self] searchResults in
                 guard let fetchesPhotos = searchResults else { return }
                 self?.photos = fetchesPhotos.results
+                print(fetchesPhotos.results.count)
+//                searchResults?.results.map({ (photo) in
+//                    print(photo.urls["regular"], photo.urls)
+//                })
+                self?.collectionView.reloadData()
             }
         })
     }
