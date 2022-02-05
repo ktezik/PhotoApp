@@ -11,10 +11,40 @@ class DetailedInfoViewController: UIViewController {
     
     var info: PhotoInfo!
     var image: UIImage!
+    var indexPath: Int!
+    
+    var deleteButtonIsActive: Bool = false
     
     //MARK: - UIElements
     private lazy var addBarButtonItem: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addBarButtonTapped))
+    }()
+    
+    private lazy var deleteBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteBarButtonTapped))
+    }()
+    
+    lazy var contentViewSize:CGSize = {
+        let withRatio = image.size.height / image.size.width
+        let imageWidth =  view.frame.width - 32
+        let viewSize = CGSize(width: self.view.frame.width, height: withRatio * imageWidth + 200)
+        return viewSize
+    }()
+    
+    lazy var scrollView: UIScrollView = {
+        let view = UIScrollView(frame: .zero)
+        view.frame = self.view.bounds
+        view.contentSize = contentViewSize
+        view.autoresizingMask = .flexibleHeight
+        view.bounces = true
+        view.showsHorizontalScrollIndicator = true
+        return view
+    }()
+    
+    lazy var containerView: UIView = {
+        let view = UIView()
+        view.frame.size = contentViewSize
+        return view
     }()
     
     private lazy var imageView: UIImageView = {
@@ -42,66 +72,97 @@ class DetailedInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        var imaaag = UIImage()
-//        
-//        let photoUrl = info.urls["regular"]
-//        guard let imageUrl = photoUrl, let url = URL(string: imageUrl) else { return }
-//        do {
-//            let imagedata = try Data(contentsOf: url)
-//            guard let imagesec = UIImage(data: imagedata) else { return }
-//            imaaag = imagesec
-//            
-//        } catch {
-//            
-//        }
-        
-        
-        
-        
         setupVC()
     }
     
-    //MARK: - Button
+    //MARK: - ButtonsAction
     
     @objc private func addBarButtonTapped() {
         PersistenceManager.shared.saveInfos(photo: info)
-        self.navigationController?.popViewController(animated: true)
+        addBarButtonItem.isEnabled = false
+//        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func deleteBarButtonTapped() {
+        
+        let alertView = UIAlertController(title: "Удалить фото", message: "Вы уверены?", preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "Удалить", style: .destructive, handler: { _ in
+            PersistenceManager.shared.infos.remove(at: self.indexPath)
+            self.navigationController?.popViewController(animated: true)
+        }))
+        self.present(alertView, animated: true, completion: nil)
     }
     
     //MARK: - SetupVC
     
     func setupVC(){
         view.backgroundColor = .white
-        title = info.description == "" ? "Image" : info.description
-        navigationItem.rightBarButtonItem = addBarButtonItem
+        title = info.description == nil ? "Image" : info.description
+        navigationItem.rightBarButtonItem = setupButtons(favorites: PersistenceManager.shared.infos)
         
-        view.addSubview(imageView)
-        view.addSubview(labelAuthor)
-        view.addSubview(labelDate)
-        view.addSubview(labelDownloads)
+        
+        view.addSubview(scrollView)
+        scrollView.addSubview(containerView)
+        containerView.addSubview(imageView)
+        containerView.addSubview(labelAuthor)
+        containerView.addSubview(labelDate)
+        containerView.addSubview(labelDownloads)
+//        view.addSubview(imageView)
+//        view.addSubview(labelAuthor)
+//        view.addSubview(labelDate)
+//        view.addSubview(labelDownloads)
         setupLayout()
     }
     
+    func setupButtons(favorites: [PersistenceManager.FavoriteData]) -> UIBarButtonItem {
+        var button = addBarButtonItem
+        var objectInArray = 0
+        
+        if deleteButtonIsActive {
+            button = deleteBarButtonItem
+        } else {
+            for item in favorites {
+                if info.urls["regular"] == item.info.urls["regular"] {
+                    objectInArray += 1
+                    print(favorites.count)
+                } else {
+                    button.isEnabled = true
+                    print(favorites.count - 1)
+                }
+            }
+        }
+        
+        if objectInArray >= 1 {
+            button.isEnabled = false
+        } else {
+            button.isEnabled = true
+        }
+
+        return button
+    }
     //MARK: - SetupLayout
     
     func setupLayout() {
-        imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: CGFloat(info.width / 15)).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: CGFloat(info.height / 15)).isActive = true
+        let withRatio = image.size.height / image.size.width
+        let imageWidth =  view.frame.width - 32
+        
+        imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        imageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 30).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: imageWidth).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: imageWidth * withRatio).isActive = true
+        
         
         labelAuthor.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20).isActive = true
-        labelAuthor.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        labelAuthor.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        labelAuthor.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        labelAuthor.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
         
         labelDate.topAnchor.constraint(equalTo: labelAuthor.bottomAnchor, constant: 10).isActive = true
-        labelDate.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        labelDate.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        labelDate.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        labelDate.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
         
         labelDownloads.topAnchor.constraint(equalTo: labelDate.bottomAnchor, constant: 10).isActive = true
-        labelDownloads.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        labelDownloads.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        labelDownloads.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
+        labelDownloads.rightAnchor.constraint(equalTo: containerView.rightAnchor).isActive = true
     }
     
     private func textLabel(font: UIFont, text: String) -> UITextView {

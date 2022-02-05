@@ -30,6 +30,7 @@ class FavoritesTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
@@ -62,11 +63,12 @@ class FavoritesTableViewController: UITableViewController {
         
         let image = vc.photoImageView.image
 
-        let detailVC = SecondSelectedViewController()
+        let detailVC = DetailedInfoViewController()
 
-        detailVC.indexPath = indexPath.item
+        detailVC.indexPath = indexPath.row
         detailVC.image = image
         detailVC.info = photos[indexPath.item].info
+        detailVC.deleteButtonIsActive = true
         navigationController?.pushViewController(detailVC, animated: true)
 
     }

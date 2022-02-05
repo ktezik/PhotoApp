@@ -75,6 +75,7 @@ class PhotosCollectionViewController: UICollectionViewController {
         
         detailVC.image = image
         detailVC.info = photos[indexPath.item]
+        detailVC.indexPath = indexPath.item
         navigationController?.pushViewController(detailVC, animated: true)
         
     }
