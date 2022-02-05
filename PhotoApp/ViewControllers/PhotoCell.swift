@@ -20,7 +20,7 @@ class PhotoCell: UICollectionViewCell {
         return imageView
     }()
     
-    var photo: Photo! {
+    var photo: PhotoInfo! {
         didSet {
             let photoUrl = photo.urls["regular"]
             guard let imageUrl = photoUrl, let url = URL(string: imageUrl) else { return }

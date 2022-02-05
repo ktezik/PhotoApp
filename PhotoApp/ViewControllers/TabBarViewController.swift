@@ -11,8 +11,8 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let photoVC = RandomPhotosCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        let favoriteVC = FavoritePhotosCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        let photoVC = PhotosCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        let favoriteVC = FavoritesTableViewController()
         
         viewControllers = [generateNavigationVC(viewController: photoVC, title: "Photo", systemImageName: "photo"), generateNavigationVC(viewController: favoriteVC, title: "Favorite", systemImageName: "heart.rectangle")]
         

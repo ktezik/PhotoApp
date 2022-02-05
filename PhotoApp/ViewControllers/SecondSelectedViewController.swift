@@ -10,7 +10,7 @@ import UIKit
 
 class SecondSelectedViewController: UIViewController {
     
-    var info: Photo!
+    var info: PhotoInfo!
     var image: UIImage!
     var indexPath: Int!
     
@@ -53,7 +53,7 @@ class SecondSelectedViewController: UIViewController {
         
         let alertView = UIAlertController(title: "Удалить фото", message: "Вы уверены?", preferredStyle: .alert)
         alertView.addAction(UIAlertAction(title: "Удалить", style: .destructive, handler: { _ in
-            Base.shared.infos.remove(at: self.indexPath)
+            PersistenceManager.shared.infos.remove(at: self.indexPath)
             self.navigationController?.popViewController(animated: true)
         }))
         self.present(alertView, animated: true, completion: nil)

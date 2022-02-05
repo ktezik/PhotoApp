@@ -7,12 +7,12 @@
 
 import UIKit
 
-class RandomPhotosCollectionViewController: UICollectionViewController {
+class PhotosCollectionViewController: UICollectionViewController {
 
     var networkFetcher = NetworkFetcher()
     private var timer: Timer?
     
-    private var photos: [Photo] = []
+    private var photos: [PhotoInfo] = []
     
     private let itemsPerRow: CGFloat = 2
     private let sectionInserts = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
@@ -71,7 +71,7 @@ class RandomPhotosCollectionViewController: UICollectionViewController {
         let cell = collectionView.cellForItem(at: indexPath) as! PhotoCell
         guard let image = cell.photoImageView.image else { return }
         
-        let detailVC = SelectedItemViewController()
+        let detailVC = DetailedInfoViewController()
         
         detailVC.image = image
         detailVC.info = photos[indexPath.item]
@@ -82,7 +82,7 @@ class RandomPhotosCollectionViewController: UICollectionViewController {
 
     //MARK: - UISearchBarDelegate
 
-extension RandomPhotosCollectionViewController: UISearchBarDelegate {
+extension PhotosCollectionViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
@@ -100,7 +100,7 @@ extension RandomPhotosCollectionViewController: UISearchBarDelegate {
 
     //MARK: - UISearchBarDelegate
 
-extension RandomPhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
+extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let photo = photos[indexPath.item]

@@ -7,13 +7,13 @@
 
 import Foundation
 
-class Base{
+class PersistenceManager{
     let defaults = UserDefaults.standard
     
-    static let shared = Base()
+    static let shared = PersistenceManager()
     
     struct FavoriteData: Codable {
-        var info: Photo
+        var info: PhotoInfo
     }
     
     var infos: [FavoriteData] {
@@ -32,7 +32,7 @@ class Base{
         }
     }
     
-    func saveInfos(photo: Photo) {
+    func saveInfos(photo: PhotoInfo) {
         
         let infoData = FavoriteData(info: photo)
         infos.insert(infoData, at: 0)

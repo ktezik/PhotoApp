@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct SearchResults: Decodable {
-    let results: [Photo]
+struct UnsplashPhoto: Decodable {
+    let results: [PhotoInfo]
 }
 
-struct Photo: Codable {
+struct PhotoInfo: Codable {
     let width: Int
     let height: Int
     let created_at: String?

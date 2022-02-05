@@ -7,9 +7,9 @@
 
 import UIKit
 
-class SelectedItemViewController: UIViewController {
+class DetailedInfoViewController: UIViewController {
     
-    var info: Photo!
+    var info: PhotoInfo!
     var image: UIImage!
     
     //MARK: - UIElements
@@ -18,6 +18,7 @@ class SelectedItemViewController: UIViewController {
     }()
     
     private lazy var imageView: UIImageView = {
+        
         let imageView = UIImageView(image: image)
         view.addSubview(imageView)
         
@@ -42,13 +43,29 @@ class SelectedItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        var imaaag = UIImage()
+//        
+//        let photoUrl = info.urls["regular"]
+//        guard let imageUrl = photoUrl, let url = URL(string: imageUrl) else { return }
+//        do {
+//            let imagedata = try Data(contentsOf: url)
+//            guard let imagesec = UIImage(data: imagedata) else { return }
+//            imaaag = imagesec
+//            
+//        } catch {
+//            
+//        }
+        
+        
+        
+        
         setupVC()
     }
     
     //MARK: - Button
     
     @objc private func addBarButtonTapped() {
-        Base.shared.saveInfos(photo: info)
+        PersistenceManager.shared.saveInfos(photo: info)
         self.navigationController?.popViewController(animated: true)
     }
     
