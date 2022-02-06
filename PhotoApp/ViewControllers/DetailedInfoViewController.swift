@@ -67,15 +67,13 @@ class DetailedInfoViewController: UIViewController {
     private lazy var labelDownloads: UITextView = {
         textLabel(font: UIFont.systemFont(ofSize: 15), text: "Download:  \(info.likes)")
     }()
-
-    //MARK: - ViewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVC()
     }
     
-    //MARK: - ButtonsAction
+    //MARK: - Buttons Action
     
     @objc private func addBarButtonTapped() {
         PersistenceManager.shared.saveInfos(photo: info)
@@ -92,7 +90,7 @@ class DetailedInfoViewController: UIViewController {
         self.present(alertView, animated: true, completion: nil)
     }
     
-    //MARK: - SetupVC
+    //MARK: - Setup Settings
     
     func setupVC(){
         view.backgroundColor = .white
@@ -133,7 +131,7 @@ class DetailedInfoViewController: UIViewController {
 
         return button
     }
-    //MARK: - SetupLayout
+    //MARK: - Setup Layout
     
     func setupLayout() {
         let withRatio = image.size.height / image.size.width

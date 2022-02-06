@@ -9,7 +9,7 @@ import UIKit
 
 class PhotosCollectionViewController: UICollectionViewController {
 
-    var networkFetcher = NetworkFetcher()
+    var networkFetcher = NetworkServices()
     private var timer: Timer?
     
     private var photos: [PhotoInfo] = []
@@ -27,10 +27,14 @@ class PhotosCollectionViewController: UICollectionViewController {
     
     //MARK: - SetupMethods
     private func setupFirsLoad() {
-        networkFetcher.fetchImages(searchText: "random") { [weak self] searchResults in
-            guard let fetchesPhotos = searchResults else { return }
-            self?.photos = fetchesPhotos.results
-            self?.collectionView.reloadData()
+        networkFetcher.request(searchText: "random") { randomPhoto in
+            switch randomPhoto {
+            case .success(let fetchesPhoto):
+                self.photos = fetchesPhoto.results
+                self.collectionView.reloadData()
+            case .failure(let error):
+                print("\(error.localizedDescription)")
+            }
         }
     }
     
@@ -90,10 +94,14 @@ extension PhotosCollectionViewController: UISearchBarDelegate {
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
             
-            self.networkFetcher.fetchImages(searchText: searchText == "" ? "random" : searchText ) { [weak self] searchResults in
-                guard let fetchesPhotos = searchResults else { return }
-                self?.photos = fetchesPhotos.results
-                self?.collectionView.reloadData()
+            self.networkFetcher.request(searchText: searchText) { [weak self] unsplashPhoto in
+                switch unsplashPhoto {
+                case .success(let fetchesPhotos):
+                    self?.photos = fetchesPhotos.results
+                    self?.collectionView.reloadData()
+                case .failure(let error):
+                    print("\(error.localizedDescription)")
+                }
             }
         })
     }

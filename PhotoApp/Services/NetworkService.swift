@@ -7,9 +7,14 @@
 
 import Foundation
 
+enum NetworkError: Error {
+    case invalidURL
+    case noData
+    case decodingError
+}
 
 class NetworkServices {
-    func request(searchText: String, completion: @escaping (Data?, Error?) -> Void) {
+    func request(searchText: String, completion: @escaping (Result<UnsplashPhoto, NetworkError>) -> Void) {
         
         let parameters = self.prepareParameters(searchText: searchText)
         let url = self.url(parameters: parameters)
@@ -44,10 +49,21 @@ class NetworkServices {
         return components.url!
     }
     
-    private func dataTask(from request: URLRequest, completion: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask {
-        return URLSession.shared.dataTask(with: request) { data, response, error in
-            DispatchQueue.main.async {
-                completion(data, error)
+    private func dataTask(from request: URLRequest, completion: @escaping (Result<UnsplashPhoto, NetworkError>) -> Void) -> URLSessionDataTask {
+        return URLSession.shared.dataTask(with: request) { data, _, error in
+            guard let data = data else {
+                completion(.failure(.noData))
+                print(error?.localizedDescription ?? "no description")
+                return
+            }
+            
+            do {
+                let unsplashPhoto = try JSONDecoder().decode(UnsplashPhoto.self, from: data)
+                DispatchQueue.main.async {
+                    completion(.success(unsplashPhoto))
+                }
+            } catch {
+                completion(.failure(.decodingError))
             }
         }
     }
