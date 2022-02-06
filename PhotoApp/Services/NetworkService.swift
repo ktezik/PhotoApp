@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 class NetworkServices {
     func request(searchText: String, completion: @escaping (Data?, Error?) -> Void) {
         

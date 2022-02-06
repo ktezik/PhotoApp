@@ -80,7 +80,6 @@ class DetailedInfoViewController: UIViewController {
     @objc private func addBarButtonTapped() {
         PersistenceManager.shared.saveInfos(photo: info)
         addBarButtonItem.isEnabled = false
-//        self.navigationController?.popViewController(animated: true)
     }
     
     @objc private func deleteBarButtonTapped() {
@@ -107,10 +106,6 @@ class DetailedInfoViewController: UIViewController {
         containerView.addSubview(labelAuthor)
         containerView.addSubview(labelDate)
         containerView.addSubview(labelDownloads)
-//        view.addSubview(imageView)
-//        view.addSubview(labelAuthor)
-//        view.addSubview(labelDate)
-//        view.addSubview(labelDownloads)
         setupLayout()
     }
     
@@ -124,10 +119,8 @@ class DetailedInfoViewController: UIViewController {
             for item in favorites {
                 if info.urls["regular"] == item.info.urls["regular"] {
                     objectInArray += 1
-                    print(favorites.count)
                 } else {
                     button.isEnabled = true
-                    print(favorites.count - 1)
                 }
             }
         }
